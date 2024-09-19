@@ -1,0 +1,71 @@
+.write-message {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-large);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+
+    &__input {
+        display: inline;
+        flex-grow: 1;
+        min-height: 20px;
+        height: fit-content;
+        max-height: 150px;
+        @include reset-input;
+        user-select: text;
+        cursor: text;
+        position: relative;
+        word-break: break-all;
+        overflow-y: auto;
+        --displayPlaceholder: inline;
+        padding-right: 4px;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+            //height: 20px;
+        }
+
+        & br {
+            display: none;
+        }
+
+        &-container {
+            display: flex;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        &::after {
+            content: 'Write a message...';
+            display: var(--displayPlaceholder);
+            position: absolute;
+            color: var(--color-gray);
+            left: 0;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    &__button {
+        @include round(36px);
+        @include flex-center;
+        padding: 8px;
+        margin-block: -4px;
+
+        @include hover {
+            background-color: var(--color-gray-light);
+        }
+
+        &-icon {
+            @include square(100%);
+            stroke-width: 2px;
+        }
+    }
+}

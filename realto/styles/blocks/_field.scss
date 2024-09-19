@@ -1,0 +1,94 @@
+
+.field {
+    &>:not(:last-child) {
+        margin-bottom: 8px;
+    }
+
+    &__label {
+        font-weight: 600;
+        position: relative;
+        display: block;
+
+        &--included {
+            &::after {
+                content: "*";
+                /*@include round(4px);
+                background-color: var(--color-dark);*/
+                font-size: 12px;
+                display: inline-block;
+                vertical-align: top;
+                margin-left: 2px;
+                //margin-top: 2px;
+            }
+        }
+    }
+
+    &__input {
+        height: var(--input-height);
+        background-color: var(--color-gray-light);
+        color: var(--color-dark);
+        border-radius: var(--border-radius);
+        padding-inline: 12px;
+        border: none;
+        position: relative;
+        transition-duration: var(--transition-duration);
+        font-weight: 400;
+
+        @include hover {
+            background-color: rgba($color: var(--color-dark-rgb), $alpha: 0.2);
+        }
+
+        &:focus {
+            @include hover {
+                background-color: var(--color-gray-light);
+            }
+        }
+
+        &--select {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &--textarea {
+            resize: none;
+            min-height: 300px;
+            padding-block: 12px;
+
+            &::placeholder {
+                max-width: 600px;
+            }
+        }
+
+        &--radio {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            //visibility: hidden;
+            margin: -1px;
+            bottom: 0;
+        }
+
+        &--long {
+            width: 140px;
+        }
+
+        &:has(input[type="radio"]:checked) {
+            background-color: var(--color-blue);
+            color: var(--color-white);
+        }
+    }
+
+    &__row {
+        display: flex;
+        gap: 12px;
+        align-items: end;
+        flex-wrap: wrap;
+    }
+
+    &__fieldset-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+}

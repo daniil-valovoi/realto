@@ -1,0 +1,31 @@
+.button {
+    height: var(--button-height);
+    padding-inline: 12px;
+    border: 2px solid var(--color-blue);
+    background-color: var(--color-blue);
+    font-weight: 600;
+    color: var(--color-white);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition-duration: var(--transition-duration);
+
+    &__icon {
+        @include square(16px);
+    }
+
+    @include hover {
+        background-color: var(--color-blue-light);
+        border-color: var(--color-blue-light);
+    }
+
+    &--ghost {
+        background-color: transparent;
+        color: var(--color-blue);
+        @include hover {
+            background-color: var(--color-blue-light-alt);
+        }
+    }
+}

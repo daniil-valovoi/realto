@@ -1,0 +1,140 @@
+.property {
+    &__grid {
+        gap: 28px;
+
+        @include tablet {
+            display: contents;
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        &--side {
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+            @include tablet {
+                display: contents;
+            }
+        }
+
+        &--tablet {
+            @include tablet-above {
+                display: contents;
+            }
+        }
+    }
+
+    &__details {
+        display: flex;
+        &-row{
+            display: flex;
+            gap: 16px;
+            align-items: center;
+
+            &-container {
+                display: flex;
+                gap: 16px;
+                @include mobile-s {
+                    flex-direction: column;
+                }
+            }
+
+            &--space-between {
+                justify-content: space-between;
+            }
+        }
+
+        &-quick-details {
+            @include mobile-s {
+                justify-content: space-evenly;
+            }
+        }
+
+        &-container {
+            display: flex;
+            gap: 4px;
+
+            &--vertical {
+                flex-direction: column;
+            }
+        }
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            &-item {
+                display: flex;
+                gap: 2px;
+                line-height: 1;
+                white-space: nowrap;
+            }
+
+            &-detail {
+                &-title {
+                    font-weight: 600;
+                    white-space: nowrap;
+
+                    &-wrapper {
+                        display: flex;
+                        max-width: 220px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    &__detail {
+        &-container {
+            display: flex;
+            flex-direction: column;
+
+            &--align-items-center {
+                align-items: center;
+            }
+
+            &--price-address {
+                @include mobile {
+                    gap: 4px;
+                }
+            }
+        }
+
+
+        &-separator {
+            border-bottom: 1px dashed var(--color-dark);
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__description {
+        &--closed {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &__title {
+        @include mobile {
+            @include fluid-text(36, 24);
+        }
+    }
+
+    &__text {
+        &--h2 {
+            @include fluid-text(30, 24);
+        }
+    }
+
+}

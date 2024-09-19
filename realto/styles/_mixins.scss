@@ -1,0 +1,94 @@
+@mixin fluid-text($max: 48, $min: 16){
+    font-size: clamp(#{$min}px, #{$max / 1440*100}vw, #{$max}px);
+}
+
+@mixin reset-link {
+    color: inherit;
+    &, &:hover {
+        text-decoration: none;
+    }
+}
+
+@mixin reset-button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    transition-duration: var(--transition-duration);
+}
+
+@mixin reset-input {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    transition-duration: var(--transition-duration);
+    outline: none;
+}
+
+@mixin flex-center($isInline: false){
+    @if $isInline {
+        display: inline-flex;
+    }
+    @else {
+        display: flex;
+    }
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+@mixin square($size) {
+    aspect-ratio: 1;
+    width: $size;
+    height: $size;
+}
+
+@mixin round($size) {
+    @include square($size);
+    border-radius: calc(infinity * 1px);
+}
+
+@mixin visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+@mixin reset-dialog {
+    border: none;
+}
+
+@mixin blur-bg {
+    background-color: rgba(var(--color-gray-light-rgb), 0.75);
+    backdrop-filter: blur(2px);
+
+    @include hover {
+        background-color: var(--color-gray-light);
+    }
+}
+
+@mixin round-borders {
+    border-radius: 999999999px;
+}
+
+@mixin circle-separator-list {
+    &>*:not(:last-child)::after {
+        content: '◦';
+        line-height: 0;
+        margin-left: var(--containerGap);
+        vertical-align: middle;
+    }
+}

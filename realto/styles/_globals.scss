@@ -1,0 +1,71 @@
+body {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.28;
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    //overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+}
+
+.body--gray-bg {
+    background-color: var(--color-gray-light);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-blue);
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+    font-weight: 600;
+}
+
+h1, .h1 {
+    font-size: 36px;
+}
+
+h2, .h2 {
+    font-size: 30px;
+}
+
+h3, .h3 {
+    font-size: 24px;
+}
+
+h4, .h4 {
+    font-size: 20px;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+button, a {
+    transition-duration: var(--transition-duration);
+    cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    &-track {
+        background-color: transparent;
+    }
+
+    &-thumb {
+        background-color: rgba(var(--color-gray-rgb), 0.4);
+        border-radius: var(--border-radius);
+    }
+}
+
+body {
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+}

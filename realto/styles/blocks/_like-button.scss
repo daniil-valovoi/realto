@@ -1,0 +1,18 @@
+.like-button {
+    @include round(36px);
+    @include reset-button;
+    @include flex-center;
+    @include blur-bg;
+    --iconFillColor: transparent;
+
+    &__icon {
+        width: 24px;
+        height: auto;
+        fill: var(--iconFillColor);
+    }
+
+    &--selected {
+        color: var(--color-blue);
+        --iconFillColor: currentColor;
+    }
+}

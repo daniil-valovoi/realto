@@ -1,0 +1,101 @@
+.chats {
+    height: 100%;
+
+    &__grid {
+        height: 100%;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    &__chats {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: auto;
+    }
+
+    &__chat {
+        border-radius: var(--border-radius);
+        background-color: var(--color-gray-light);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        &-main {
+            padding-inline: 20px;
+            padding-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        &-header {
+            position: sticky;
+            top: 0;
+            border: var(--border);
+            border-radius: var(--border-radius);
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        &-listing {
+            position: relative;
+            border-bottom-right-radius: 0;
+            padding: 8px;
+            border: none;
+            grid-template-columns: 150px 1fr;
+
+            &-image {
+                &-container {
+                    width: 100%;
+                    height: 70px;
+                }
+            }
+
+            &-details {
+                gap: 8px;
+                justify-content: center;
+            }
+        }
+    
+        &-call-the-user-button {
+            background-color: var(--color-white);
+            border-bottom-left-radius: var(--border-radius);
+            padding: 0 8px 2px 8px;
+            position: absolute;
+            top: 100%;
+            right: 0;
+        }
+    
+        &-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 800px;
+            width: 100%;
+            padding: 16px 20px;
+            overflow-y: auto;
+        }
+    
+        &-write-message {
+            position: sticky;
+            bottom: 0;
+            flex-shrink: 0;
+        }
+    }
+
+    &__support-chat {
+        &-listing {
+            border-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+        }
+    }
+
+    
+}

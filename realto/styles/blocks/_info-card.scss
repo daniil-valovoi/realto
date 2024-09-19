@@ -1,0 +1,35 @@
+.info-card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 28px 24px;
+
+    @include mobile {
+        padding: 20px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+
+        &--border-bottom {
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--color-gray-light);
+        }
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__subheading {
+        color: var(--color-gray);
+    }
+}

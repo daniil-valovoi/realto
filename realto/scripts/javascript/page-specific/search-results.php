@@ -1,0 +1,1 @@
+<script src="/realto/scripts/javascript/blocks/search-results.js" type="module"></script>

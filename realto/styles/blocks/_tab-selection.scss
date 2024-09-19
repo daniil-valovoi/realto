@@ -1,0 +1,22 @@
+.tab-selection {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--color-gray-light);
+    width: fit-content;
+
+    &__button {
+        color: var(--color-gray);
+        @include reset-button;
+
+        @include hover {
+            color: var(--color-dark);
+        }
+
+        &--selected {
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+    }
+
+}
