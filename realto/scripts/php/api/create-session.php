@@ -1,8 +1,12 @@
 <?php
-//session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/database-connection.php';
 
-function createSession($userId) {
+function createSession($userId)
+{
     global $connection;
 
     $query = "SELECT * FROM users WHERE user_id = ?";
@@ -22,10 +26,9 @@ function createSession($userId) {
 
     $user = $result->fetch_assoc();
 
-    if($user['role_id'] === 2) {
+    if ($user['role_id'] === 2) {
         $role = 'admin';
-    }
-    else {
+    } else {
         $role = 'user';
     }
 

@@ -1,8 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/database-connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/api-functions.php';
-setcookie('test', 'testtest', 0, '/', '');
-
 
 $sessionCheckResponse = [
     'logged_in' => false
@@ -10,14 +8,12 @@ $sessionCheckResponse = [
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     setFullUserData();
-}
-
-elseif (isset($_COOKIE['user_token'])) {
+} elseif (isset($_COOKIE['user_token'])) {
     $userToken = $_COOKIE['user_token'];
     list($userId, $signature) = explode('_', $userToken);
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/functions/signature.php';
-    $expectedSignature = checkSignature($userId); 
+    $expectedSignature = checkSignature($userId);
 
     if ($signature === $expectedSignature) {
         // Signature is valid, set session variables
@@ -42,18 +38,17 @@ elseif (isset($_COOKIE['user_token'])) {
 
             setFullUserData();
         }
+    } else {
+        returnData(['signature doesnt match']);
     }
-    else {
-        returnData(['signature doesnt match, ->', $expectedSignature, $signature]);
-    }
-}
-else {
+} else {
     returnData('user token is not set');
 }
 
 returnJsonOnly($sessionCheckResponse);
 
-function setFullUserData() {
+function setFullUserData()
+{
     global $sessionCheckResponse;
     $sessionCheckResponse['logged_in'] = true;
     $sessionCheckResponse['user'] = [

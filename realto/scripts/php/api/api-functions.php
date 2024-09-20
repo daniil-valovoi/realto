@@ -1,7 +1,8 @@
 <?php
 $defaultProfilePictureName = 'default.png';
 
-function returnData($data) {
+function returnData($data)
+{
     if (isset($_SERVER['HTTP_AJAX_REQUEST']) && $_SERVER['HTTP_AJAX_REQUEST'] === 'true') {
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -10,7 +11,8 @@ function returnData($data) {
     return $data;
 }
 
-function returnJsonOnly($data) {
+function returnJsonOnly($data)
+{
     if (isset($_SERVER['HTTP_AJAX_REQUEST']) && $_SERVER['HTTP_AJAX_REQUEST'] === 'true') {
         header('Content-Type: application/json');
         echo json_encode($data);
@@ -18,19 +20,20 @@ function returnJsonOnly($data) {
     }
 }
 
-function updateData($query, $params = []) {
+function updateData($query, $params = [])
+{
     global $connection;
     $query = $connection->prepare($query);
     $query->bind_param(...$params);
-    if($query->execute()) {
+    if ($query->execute()) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
 
-function fetchData($query, $params = [], $singleColumn = null, $singleResult = true) {
+function fetchData($query, $params = [], $singleColumn = null, $singleResult = true)
+{
     global $connection;
     $query = $connection->prepare($query);
     if ($params) {
@@ -39,42 +42,43 @@ function fetchData($query, $params = [], $singleColumn = null, $singleResult = t
     $query->execute();
     $result = $query->get_result();
     if ($singleColumn) {
-        if($singleResult) {
+        if ($singleResult) {
             $data = $result->fetch_assoc();
             return $data ? $data[$singleColumn] : null;
         }
 
         $data = [];
         while ($row = $result->fetch_assoc()) {
-        $data[] = $row[$singleColumn];
+            $data[] = $row[$singleColumn];
         }
-        return $data; 
+        return $data;
 
     }
 
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        $data[] = $row; 
+        $data[] = $row;
     }
 
     return $data;
 }
 
-function deleteData($query, $params = []) {
+function deleteData($query, $params = [])
+{
     global $connection;
     $query = $connection->prepare($query);
     if ($params) {
         $query->bind_param(...$params);
     }
-    if($query->execute()) {
+    if ($query->execute()) {
         return true;
-    }
-    else {
+    } else {
         return null;
     }
 }
 
-function insertData($query, $params = []) {
+function insertData($query, $params = [])
+{
     global $connection;
 
     $query = $connection->prepare($query);
@@ -93,7 +97,8 @@ function insertData($query, $params = []) {
     return $connection->insert_id;
 }
 
-function moveFile($validatedFile, $destinationPath, $userId) {
+function moveFile($validatedFile, $destinationPath, $userId)
+{
     if (!is_dir($destinationPath) || !is_writable($destinationPath)) {
         throw new Exception("The destination path does not exist or is not writable.");
     }
@@ -128,21 +133,23 @@ function moveFile($validatedFile, $destinationPath, $userId) {
     ];
 }*/
 
-function restrictAccess() {
-    if(!isset($_SERVER['HTTP_AJAX_REQUEST'])) {
+function restrictAccess()
+{
+    if (!isset($_SERVER['HTTP_AJAX_REQUEST'])) {
         if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
             echo '<script>alert("Not authorized session");</script>';
-            echo '<script>setTimeout(function() { window.location.href = "/realto/pages/home.php"; }, 2000);</script>';
+            echo '<script>setTimeout(function() { window.location.href = "/realto/pages/home.php"; }, 500);</script>';
             exit;
         }
     }
 }
 
-function restrictAdminAccess() {
-    if(!isset($_SERVER['HTTP_AJAX_REQUEST'])) {
+function restrictAdminAccess()
+{
+    if (!isset($_SERVER['HTTP_AJAX_REQUEST'])) {
         if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] != 'admin') {
             echo '<script>alert("Admin access only");</script>';
-            echo '<script>setTimeout(function() { window.location.href = "/realto/pages/home.php"; }, 2000);</script>';
+            echo '<script>setTimeout(function() { window.location.href = "/realto/pages/home.php"; }, 500);</script>';
             exit;
         }
     }
