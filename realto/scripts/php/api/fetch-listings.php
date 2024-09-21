@@ -1,10 +1,11 @@
 <?php
-if(isset($_GET['variant'])) {
+if (isset($_GET['variant'])) {
     $variant = $_GET['variant'];
 
-    function getListings($query_util) {
+    function getListings($query_util)
+    {
         require_once 'database-connection.php';
-        $baseQuery = "SELECT DISTINCT p.*, fs.*, l.date_listed, fr.price AS rent_price, fs.price AS sale_price, pi.image_name, d.district_name,
+        $baseQuery = "SELECT DISTINCT p.*, fs.*, l.listing_id, l.date_listed, fr.price AS rent_price, fs.price AS sale_price, pi.image_name, d.district_name,
 
             CASE WHEN fr.property_id IS NOT NULL THEN 1
             ELSE 0
@@ -36,29 +37,27 @@ if(isset($_GET['variant'])) {
             $response = $query->get_result();
             $result = [];
 
-            while($row = $response->fetch_assoc()) {
+            while ($row = $response->fetch_assoc()) {
                 $result[] = $row;
             }
-                
+
             header('Content-Type: application/json');
             echo json_encode($result);
-        }
-
-        catch(Exception $exception) {
+        } catch (Exception $exception) {
             http_response_code(500);
             echo json_encode(['error' => $exception->getMessage()]);
-        }        
+        }
     }
 
     switch ($variant) {
         case 'family-houses':
-            $query = 
-            "WHERE p.bedrooms > 3 AND p.type_id = 1";
+            $query =
+                "WHERE p.bedrooms > 3 AND p.type_id = 1";
             getListings($query);
             break;
         case 'short-term-rentals':
-            $query = 
-            "WHERE fr.minimal_rent_time < 30";
+            $query =
+                "WHERE fr.minimal_rent_time < 30";
             getListings($query);
             break;
 
@@ -76,12 +75,12 @@ if(isset($_GET['variant'])) {
             $query = 'WHERE fr.price > 2000';
             getListings($query);
             break;
-        
+
         default:
             http_response_code(400); // Bad Request
             echo json_encode(['error' => 'Invalid variant specified']);
             break;
     }
 
-    
+
 }

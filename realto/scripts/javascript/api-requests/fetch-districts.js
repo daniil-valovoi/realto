@@ -1,6 +1,6 @@
 export async function addDistricts(parentElementSelector, appendingElementClass, appendingElementType, districtLimit, isSelect = null, html = null) {
     const parentElements = document.querySelectorAll(`${parentElementSelector}[data-districts]`);
-    
+
     const response = await fetch('/realto/scripts/php/api/fetch-districts.php', {
         headers: {
             'ajax-request': 'true'
@@ -10,7 +10,7 @@ export async function addDistricts(parentElementSelector, appendingElementClass,
 
     parentElements.forEach(async (parentElement) => {
         if (parentElement) {
-            parentElement.innerHTML = '';
+            parentElement.querySelectorAll('option[data-dynamic]').forEach(o => o.remove());
             var iterationsAmount = districts.length;
             if (districtLimit) {
                 iterationsAmount = districtLimit;
@@ -19,6 +19,7 @@ export async function addDistricts(parentElementSelector, appendingElementClass,
             for (let i = 0; i < iterationsAmount; i++) {
                 const district = districts[i];
                 const appendingElement = document.createElement(`${appendingElementType}`);
+                appendingElement.setAttribute('data-dynamic', '');
                 appendingElement.innerText = district.district_name;
                 if (appendingElementClass) {
                     appendingElement.classList.add(`${appendingElementClass}`);

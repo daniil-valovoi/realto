@@ -12,11 +12,11 @@ $offerType = isset($_GET['offer-type']) ? $validator->validateSelection('offer t
 
 // Check if 'district' is set in the GET request
 $allowedDistricts = fetchData('SELECT district_name FROM districts', null, 'district_name', false);
+$allowedDistricts[] = 'all';
 if (isset($_GET['district'])) {
     $district = $validator->validateSelection('district', $_GET['district'], $allowedDistricts);
-}
-else {
-    $district = $allowedDistricts[0];
+} else {
+    $district = 'all';
 }
 
 
@@ -24,7 +24,7 @@ else {
     returnData([$validator->getErrors(), $propertyType, $offerType]);
 }*/
 
-$query = "SELECT DISTINCT p.*, d.district_name, pi.image_name, pt.type_name, 
+$query = "SELECT DISTINCT p.*, l.listing_id, d.district_name, pi.image_name, pt.type_name, 
     fs.price AS sale_price, 
     fr.price AS rent_price,
     CASE
@@ -55,20 +55,20 @@ $whereClauses = ['p.status_id = 1'];
 $paramTypes = [];
 $paramValues = [];
 
-switch($propertyType) {
+switch ($propertyType) {
     case 'houses':
-        $whereClauses[] ='p.type_id = 1';
+        $whereClauses[] = 'p.type_id = 1';
         break;
 
     case 'apartments':
-        $whereClauses[] ='p.type_id = 2';
+        $whereClauses[] = 'p.type_id = 2';
         break;
 
     case 'all':
         break;
 }
 
-switch($offerType) {
+switch ($offerType) {
     case 'for-sale':
         $whereClauses[] = 'l.offer_type_id = 2';
         break;
@@ -82,10 +82,10 @@ switch($offerType) {
         break;
 }
 
-if($district) {
+if ($district && $district !== 'all') {
     $whereClauses[] = 'd.district_name = ?';
     $paramTypes[] = 's';
-    $paramValues[] = $district; 
+    $paramValues[] = $district;
 }
 
 $response = [
@@ -94,10 +94,10 @@ $response = [
 ];
 
 $query = $query . ' WHERE ' . implode(' AND ', $whereClauses);
-//returnData($query);
-$listings = fetchData($query, [implode('', $paramTypes), implode(', ', $paramValues)]);
+$params = !empty($paramTypes) ? [implode('', $paramTypes), ...$paramValues] : [];
+$listings = fetchData($query, $params);
 
-if(count($listings) > 0) {
+if (count($listings) > 0) {
     $response['empty'] = false;
     $response['listings'] = $listings;
 }

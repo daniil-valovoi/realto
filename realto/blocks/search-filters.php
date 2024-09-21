@@ -11,13 +11,16 @@
         <div class="search-filters__form-inner">
             <div class="search-filters__fieldset-row field__fieldset-row">
                 <fieldset class="search-filters__field field">
-                    <legend class="search-filters__field-label field__label field__label--required">Property type</legend>
+                    <legend class="search-filters__field-label field__label field__label--required">Property type
+                    </legend>
                     <div class="search-filters__field-row field__row">
                         <label class="search-filters__field-input field__input button">Houses
-                            <input type="radio" name="property-type" class="field__input--radio" value="houses" required>
+                            <input type="radio" name="property-type" class="field__input--radio" value="houses"
+                                required>
                         </label>
                         <label class="search-filters__field-input field__input button">Apartments
-                            <input type="radio" name="property-type" class="field__input--radio" value="apartments" required>
+                            <input type="radio" name="property-type" class="field__input--radio" value="apartments"
+                                required>
                         </label>
                         <label class="search-filters__field-input field__input button">All types
                             <input type="radio" name="property-type" class="field__input--radio" value="all" required>
@@ -96,10 +99,12 @@
                     </div>
                 </fieldset>
                 <fieldset class="search-filters__field field">
-                    <legend class="search-filters__field-label field__label field__label--required">Select district</legend>
+                    <legend class="search-filters__field-label field__label field__label--required">Select district
+                    </legend>
                     <div class="search-filters__field-row field__row">
-                        <select class="search-filters__field-input field__input field__input--select" name="district" id="search-filters-district" required data-districts>
-                            <option value="any">Any district</option>
+                        <select class="search-filters__field-input field__input field__input--select" name="district"
+                            id="search-filters-district" required data-districts>
+                            <option value="all">All districts</option>
                         </select>
                     </div>
                 </fieldset>
@@ -147,7 +152,8 @@
 -->
         </div>
         <div class="search-filters__buttons-container">
-            <button class="search-filters__button--ghost search-filters__button button--ghost button" type="reset">Reset filters</button>
+            <button class="search-filters__button--ghost search-filters__button button--ghost button" type="reset">Reset
+                filters</button>
             <button class="search-filters__button button">Search</button>
         </div>
     </form>
