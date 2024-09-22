@@ -96,6 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                     `;
                     container.appendChild(listingHTML);
+                    const likeBtn = listingHTML.querySelector('.like-button');
+                    likeBtn.addEventListener('click', () => toggleFavorite(listing.listing_id, likeBtn));
                 });
             }
         }
@@ -139,3 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
         history.pushState(null, '', `?${queryParams}`);
     })
 })
+
+async function toggleFavorite(listingId, btn) {
+    const formData = new FormData();
+    formData.append('listing_id', listingId);
+    const response = await fetch('/realto/scripts/php/api/toggle-favorite.php', {
+        method: 'POST',
+        body: formData,
+        headers: { 'ajax-request': 'true' }
+    });
+    if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+            btn.classList.toggle('like-button--selected', result.action === 'added');
+        }
+    }
+}
