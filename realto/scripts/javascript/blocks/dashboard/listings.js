@@ -1,37 +1,25 @@
-export async function displayListings() {
+// offer_type_id: 1 = for rent, 2 = for sale
+const OFFER_TYPE = { 'All': null, 'For sale': 2, 'For rent': 1 };
+
+function renderListings(listings, offerTypeId) {
     const listingsContainer = document.querySelector('.dashboard__item-list');
-    listingsContainer.innerHTML='';
-    const response = await fetch('/realto/scripts/php/blocks/dashboard/display-listings.php', {
-        headers: {
-            'ajax-request': 'true'
-        }
-    });
-    if (response.ok) {
-        try {
-            const result = await response.json();
-            if (result.empty) {
-                throw new Error("No listings available");
-            }
-            const listings = result.listings;
-            
-            listings.forEach(listing => {
-                var buttonAction = null;
-                var buttonText = null;
+    listingsContainer.innerHTML = '';
+    const filtered = offerTypeId === null ? listings : listings.filter(l => l.offer_type_id === offerTypeId);
 
-                if(listing.listing_status === 1) {
-                    buttonAction = 'deactivate';
-                    buttonText = 'Deactivate';
-                }
-                if(listing.listing_status === 2) {
-                    buttonAction = 'activate';
-                    buttonText = 'Activate';
-                }
+    if (!filtered.length) {
+        listingsContainer.innerHTML = '<li>No listings found.</li>';
+        return;
+    }
 
-                const listingCard = document.createElement('li');
-                listingCard.dataset.dashboardElementType = 'listing';
-                listingCard.dataset.dashboardElementId = listing.listing_id;
-                listingCard.classList.add('listing');
-                listingCard.innerHTML = `
+    filtered.forEach(listing => {
+        const buttonAction = listing.listing_status === 1 ? 'deactivate' : 'activate';
+        const buttonText   = listing.listing_status === 1 ? 'Deactivate' : 'Activate';
+
+        const listingCard = document.createElement('li');
+        listingCard.dataset.dashboardElementType = 'listing';
+        listingCard.dataset.dashboardElementId = listing.listing_id;
+        listingCard.classList.add('listing');
+        listingCard.innerHTML = `
                 <div class="listing__image-container">
                     <img src="/realto/images/property-images/${listing.image_name}" alt="Listing main image" class="listing__image">
                 </div>
@@ -77,11 +65,37 @@ export async function displayListings() {
                     </div>
                 </div>
             `;
-                listingsContainer.appendChild(listingCard);
-                const listingActions = listingCard.querySelectorAll('[data-dashboard-element-action]');
-                listingActions.forEach(action => {
-                    action.addEventListener('click', handleAction);
-                })
+        listingsContainer.appendChild(listingCard);
+        listingCard.querySelectorAll('[data-dashboard-element-action]').forEach(action => {
+            action.addEventListener('click', handleAction);
+        });
+    });
+}
+
+export async function displayListings() {
+    const listingsContainer = document.querySelector('.dashboard__item-list');
+    listingsContainer.innerHTML = '';
+    const response = await fetch('/realto/scripts/php/blocks/dashboard/display-listings.php', {
+        headers: {
+            'ajax-request': 'true'
+        }
+    });
+    if (response.ok) {
+        try {
+            const result = await response.json();
+            if (result.empty) {
+                throw new Error("No listings available");
+            }
+            const listings = result.listings;
+
+            renderListings(listings, null);
+
+            document.querySelectorAll('.tab-selection__button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-selection__button').forEach(b => b.classList.remove('tab-selection__button--selected'));
+                    btn.classList.add('tab-selection__button--selected');
+                    renderListings(listings, OFFER_TYPE[btn.textContent.trim()] ?? null);
+                });
             });
         }
         catch (error) {
@@ -89,6 +103,7 @@ export async function displayListings() {
         }
     }
 }
+
 
 async function handleAction(event) {
     event.preventDefault();
@@ -99,8 +114,8 @@ async function handleAction(event) {
     const targetId = parent.dataset.dashboardElementId;
     const action = button.dataset.dashboardElementAction;
 
-    if(action === 'delete') {
-        if(!confirm(`Do you really want to delete this ${targetType}?`)) {
+    if (action === 'delete') {
+        if (!confirm(`Do you really want to delete this ${targetType}?`)) {
             return;
         }
     }
@@ -128,12 +143,12 @@ async function handleAction(event) {
         if (result.success) {
             alert('Action completed successfully');
             location.reload();
-        } 
+        }
         else {
             alert(result.message || 'Failed to complete action');
         }
 
-    } 
+    }
     else {
         alert('An error occurred. Try again later.');
         console.error('Server error:', response.status, response.statusText);

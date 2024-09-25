@@ -1,37 +1,25 @@
-export async function displayProperties() {
+// status_id: 1 = active, 2 = inactive
+const STATUS_FILTER = { 'All': null, 'Active': 1, 'Inactive': 2 };
+
+function renderProperties(properties, statusId) {
     const propertiesContainer = document.querySelector('.dashboard__item-list');
-    propertiesContainer.innerHTML='';
-    const response = await fetch('/realto/scripts/php/blocks/dashboard/display-properties.php', {
-        headers: {
-            'ajax-request': 'true'
-        }
-    });
-    if (response.ok) {
-        try {
-            const result = await response.json();
-            if (result.empty) {
-                throw new Error("No properties available");
-            }
-            const properties = result.properties;
-            
-            properties.forEach(property => {
-                var buttonAction = null;
-                var buttonText = null;
+    propertiesContainer.innerHTML = '';
+    const filtered = statusId === null ? properties : properties.filter(p => p.status_id === statusId);
 
-                if(property.status_id === 1) {
-                    buttonAction = 'deactivate';
-                    buttonText = 'Deactivate';
-                }
-                if(property.status_id === 2) {
-                    buttonAction = 'activate';
-                    buttonText = 'Activate';
-                }
+    if (!filtered.length) {
+        propertiesContainer.innerHTML = '<li>No properties found.</li>';
+        return;
+    }
 
-                const propertyCard = document.createElement('li');
-                propertyCard.dataset.dashboardElementType = 'property';
-                propertyCard.dataset.dashboardElementId = property.property_id;
-                propertyCard.classList.add('listing');
-                propertyCard.innerHTML = `
+    filtered.forEach(property => {
+        const buttonAction = property.status_id === 1 ? 'deactivate' : 'activate';
+        const buttonText   = property.status_id === 1 ? 'Deactivate' : 'Activate';
+
+        const propertyCard = document.createElement('li');
+        propertyCard.dataset.dashboardElementType = 'property';
+        propertyCard.dataset.dashboardElementId = property.property_id;
+        propertyCard.classList.add('listing');
+        propertyCard.innerHTML = `
                 <div class="listing__image-container">
                     <img src="/realto/images/property-images/${property.image_name}" alt="Listing main image" class="listing__image">
                 </div>
@@ -75,11 +63,37 @@ export async function displayProperties() {
                     </div>
                 </div>
             `;
-                propertiesContainer.appendChild(propertyCard);
-                const propertyActions = propertyCard.querySelectorAll('[data-dashboard-element-action]');
-                propertyActions.forEach(action => {
-                    action.addEventListener('click', handleAction);
-                })
+        propertiesContainer.appendChild(propertyCard);
+        propertyCard.querySelectorAll('[data-dashboard-element-action]').forEach(action => {
+            action.addEventListener('click', handleAction);
+        });
+    });
+}
+
+export async function displayProperties() {
+    const propertiesContainer = document.querySelector('.dashboard__item-list');
+    propertiesContainer.innerHTML = '';
+    const response = await fetch('/realto/scripts/php/blocks/dashboard/display-properties.php', {
+        headers: {
+            'ajax-request': 'true'
+        }
+    });
+    if (response.ok) {
+        try {
+            const result = await response.json();
+            if (result.empty) {
+                throw new Error("No properties available");
+            }
+            const properties = result.properties;
+
+            renderProperties(properties, null);
+
+            document.querySelectorAll('.tab-selection__button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-selection__button').forEach(b => b.classList.remove('tab-selection__button--selected'));
+                    btn.classList.add('tab-selection__button--selected');
+                    renderProperties(properties, STATUS_FILTER[btn.textContent.trim()] ?? null);
+                });
             });
         }
         catch (error) {
@@ -87,6 +101,8 @@ export async function displayProperties() {
         }
     }
 }
+
+
 
 async function handleAction(event) {
     event.preventDefault();

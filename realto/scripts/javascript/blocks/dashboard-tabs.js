@@ -1,6 +1,7 @@
 import { displayProperties } from "/realto/scripts/javascript/blocks/dashboard/properties.js";
 import { displayListings } from "/realto/scripts/javascript/blocks/dashboard/listings.js";
 import { displayUsers } from "/realto/scripts/javascript/blocks/dashboard/users.js";
+import { displayLikedListings } from "/realto/scripts/javascript/blocks/dashboard/liked-listings.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const dashboard = document.querySelector('.dashboard');
@@ -37,6 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if(dashboardTab === 'manage-users') {
                                     displayUsers();
                                 }
+                                if(dashboardTab === 'liked-listings') {
+                                    displayLikedListings();
+                                }
                             } else {
                                 throw new Error();
                             }
@@ -58,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if(dashboardTab === 'listings') {
                         displayListings();
+                    }
+                    if(dashboardTab === 'liked-listings') {
+                        displayLikedListings();
                     }
                 }
             });
