@@ -12,7 +12,7 @@ $userProperties = null;
 $userId = $_SESSION['user_id'];
 if($_SESSION['role'] === 'user') {
     $query = "SELECT p.*, pi.image_name, d.district_name, ps.status_name, l.listing_id,
-    u.user_id, l.status_id AS listing_status
+    u.user_id, l.status_id AS listing_status, l.offer_type_id
     FROM
     properties AS p
     JOIN property_images AS pi ON p.main_image_id = pi.image_id
@@ -25,7 +25,7 @@ if($_SESSION['role'] === 'user') {
 }
 
 if($_SESSION['role'] === 'admin') {
-    $query = "SELECT p.*, pi.image_name, d.district_name, ps.status_name, l.listing_id, l.status_id AS listing_status
+    $query = "SELECT p.*, pi.image_name, d.district_name, ps.status_name, l.listing_id, l.status_id AS listing_status, l.offer_type_id
     FROM
     properties AS p
     JOIN property_images AS pi ON p.main_image_id = pi.image_id

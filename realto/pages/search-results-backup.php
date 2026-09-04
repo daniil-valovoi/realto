@@ -1,418 +1,446 @@
-<?php require_once '../blocks/header.php';?>
+<?php require_once '../blocks/header.php'; ?>
 <style>
     .footer {
         background-color: var(--color-white);
     }
 </style>
+
 <body class="body--gray-bg">
-<header class="search-results__form-header header">
-    <div class="search-results__form-header-inner header__inner container">
-        <form action="" class="search-results__form search-form hidden-mobile">
-            <select name="property-type" id="search-results__form-property-type" class="search-results__form-input field__input ">
-                <option value="homes">Homes</option>
-                <option value="apartments">Apartments</option>
-            </select>
-            <select name="listing-type" id="search-results__form-listing-type" class="search-results__form-input field__input ">
-                <option value="for-sale">For Sale</option>
-                <option value="for-rent">For Rent</option>
-            </select>
-            <select name="district" data-districts class="search-results__form-input field__input">
-                <option value="any-district">Any District</option>
-            </select>
-            <!--<fieldset class="display-contents">
+    <header class="search-results__form-header header">
+        <div class="search-results__form-header-inner header__inner container">
+            <form action="" class="search-results__form search-form hidden-mobile">
+                <select name="property-type" id="search-results__form-property-type"
+                    class="search-results__form-input field__input ">
+                    <option value="houses">houses</option>
+                    <option value="apartments">Apartments</option>
+                </select>
+                <select name="listing-type" id="search-results__form-listing-type"
+                    class="search-results__form-input field__input ">
+                    <option value="for-sale">For Sale</option>
+                    <option value="for-rent">For Rent</option>
+                </select>
+                <select name="district" data-districts class="search-results__form-input field__input">
+                    <option value="any-district">Any District</option>
+                </select>
+                <!--<fieldset class="display-contents">
                 <legend class="visually-hidden">Price filters</legend>
                 <div class="search-filters__field-row field__row">
                     <input type="number" name="footage-min" class="search-filters__input field__input" placeholder="From..." min="0" max="30000">
                     <input type="number" name="footage-max" class="search-filters__input field__input" placeholder="Up to..." min="0" max="30000">
                 </div>
             </fieldset>-->
-            <!--<button class="search-results__form-button search-form__button button">Search</button>-->
-        </form>
-        <button class="search-filters__open-button search-results__search-filters-open-button button" type="button" onclick="searchFilters.showModal()" id="search-filters-open-button">
-            Filters
-            <svg class="button__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke-width: 1px; stroke: currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.92306 4.54286C7.64855 4.54286 6.61537 5.579 6.61537 6.85714C6.61537 8.13529 7.64855 9.17143 8.92306 9.17143C10.1976 9.17143 11.2307 8.13529 11.2307 6.85714C11.2307 5.579 10.1976 4.54286 8.92306 4.54286ZM5.0769 6.85714C5.0769 4.7269 6.79889 3 8.92306 3C11.0472 3 12.7692 4.7269 12.7692 6.85714C12.7692 8.98738 11.0472 10.7143 8.92306 10.7143C6.79889 10.7143 5.0769 8.98738 5.0769 6.85714Z" fill="none"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6.85726C2 6.43121 2.3444 6.08583 2.76923 6.08583H5.84615C6.27099 6.08583 6.61537 6.43109 6.61537 6.85714C6.61537 7.28319 6.27099 7.62868 5.84615 7.62868H2.76923C2.3444 7.62868 2 7.2833 2 6.85726Z" fill="none"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2307 6.85714C11.2307 6.43109 11.5751 6.08594 11.9999 6.08594L21.2307 6.08594C21.6555 6.08594 21.9999 6.43132 21.9999 6.85737C21.9999 7.28341 21.6555 7.62879 21.2307 7.62879L11.9999 7.62879C11.5751 7.62879 11.2307 7.28319 11.2307 6.85714Z" fill="none"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0769 14.8285C16.3514 14.8285 17.3846 15.8646 17.3846 17.1428C17.3846 18.4209 16.3514 19.4571 15.0769 19.4571C13.8024 19.4571 12.7692 18.4209 12.7692 17.1428C12.7692 15.8646 13.8024 14.8285 15.0769 14.8285ZM18.923 17.1428C18.923 15.0125 17.2011 13.2856 15.0769 13.2856C12.9527 13.2856 11.2307 15.0125 11.2307 17.1428C11.2307 19.273 12.9527 20.9999 15.0769 20.9999C17.2011 20.9999 18.923 19.273 18.923 17.1428Z" fill="none"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M22 17.1429C22 16.7169 21.6556 16.3715 21.2307 16.3715H18.1538C17.729 16.3715 17.3846 16.7167 17.3846 17.1428C17.3846 17.5688 17.729 17.9144 18.1538 17.9144H21.2307C21.6556 17.9144 22 17.569 22 17.1429Z" fill="none"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7692 17.1428C12.7692 16.7167 12.4249 16.3716 12 16.3716L2.76925 16.3716C2.34442 16.3716 2.00002 16.717 2.00002 17.143C2.00002 17.5691 2.34442 17.9144 2.76925 17.9144L12 17.9144C12.4249 17.9144 12.7692 17.5688 12.7692 17.1428Z" fill="none"/>
-            </svg>
-        </button>
-    </div>
-</header>
+                <!--<button class="search-results__form-button search-form__button button">Search</button>-->
+            </form>
+            <button class="search-filters__open-button search-results__search-filters-open-button button" type="button"
+                onclick="searchFilters.showModal()" id="search-filters-open-button">
+                Filters
+                <svg class="button__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="stroke-width: 1px; stroke: currentColor">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8.92306 4.54286C7.64855 4.54286 6.61537 5.579 6.61537 6.85714C6.61537 8.13529 7.64855 9.17143 8.92306 9.17143C10.1976 9.17143 11.2307 8.13529 11.2307 6.85714C11.2307 5.579 10.1976 4.54286 8.92306 4.54286ZM5.0769 6.85714C5.0769 4.7269 6.79889 3 8.92306 3C11.0472 3 12.7692 4.7269 12.7692 6.85714C12.7692 8.98738 11.0472 10.7143 8.92306 10.7143C6.79889 10.7143 5.0769 8.98738 5.0769 6.85714Z"
+                        fill="none" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M2 6.85726C2 6.43121 2.3444 6.08583 2.76923 6.08583H5.84615C6.27099 6.08583 6.61537 6.43109 6.61537 6.85714C6.61537 7.28319 6.27099 7.62868 5.84615 7.62868H2.76923C2.3444 7.62868 2 7.2833 2 6.85726Z"
+                        fill="none" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M11.2307 6.85714C11.2307 6.43109 11.5751 6.08594 11.9999 6.08594L21.2307 6.08594C21.6555 6.08594 21.9999 6.43132 21.9999 6.85737C21.9999 7.28341 21.6555 7.62879 21.2307 7.62879L11.9999 7.62879C11.5751 7.62879 11.2307 7.28319 11.2307 6.85714Z"
+                        fill="none" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.0769 14.8285C16.3514 14.8285 17.3846 15.8646 17.3846 17.1428C17.3846 18.4209 16.3514 19.4571 15.0769 19.4571C13.8024 19.4571 12.7692 18.4209 12.7692 17.1428C12.7692 15.8646 13.8024 14.8285 15.0769 14.8285ZM18.923 17.1428C18.923 15.0125 17.2011 13.2856 15.0769 13.2856C12.9527 13.2856 11.2307 15.0125 11.2307 17.1428C11.2307 19.273 12.9527 20.9999 15.0769 20.9999C17.2011 20.9999 18.923 19.273 18.923 17.1428Z"
+                        fill="none" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M22 17.1429C22 16.7169 21.6556 16.3715 21.2307 16.3715H18.1538C17.729 16.3715 17.3846 16.7167 17.3846 17.1428C17.3846 17.5688 17.729 17.9144 18.1538 17.9144H21.2307C21.6556 17.9144 22 17.569 22 17.1429Z"
+                        fill="none" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12.7692 17.1428C12.7692 16.7167 12.4249 16.3716 12 16.3716L2.76925 16.3716C2.34442 16.3716 2.00002 16.717 2.00002 17.143C2.00002 17.5691 2.34442 17.9144 2.76925 17.9144L12 17.9144C12.4249 17.9144 12.7692 17.5688 12.7692 17.1428Z"
+                        fill="none" />
+                </svg>
+            </button>
+        </div>
+    </header>
 
-<main>
-    <section class="section container">
-        <div class="section__header">
-            <div class="search-results__header">
-                <h1 class="search-results__title">Rent a house in Wynwood, Miami</h1>
-                <div class="search-results__sort-by sort-by">
-                    <label for="search-results-sort-by-select" class="search-results__sort-by-label sort-by__label">Sort by:</label>
-                    <select id="search-results-sort-by-select" class="search-results__sort-by-select sort-by__select">
-                        <option value="newest">Newest listings</option>
-                        <option value="price-lth">Price low to high</option>
-                        <option value="price-htl">Price high to low</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="search-results__body">
-            <div class="search-results__grid">
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-card__top">
-                        <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg"
-                        alt="" class="property-card__image">
-                        <div class="property-card__type">
-                            <span>${propertyType}</span>
-                        </div>
-                    </div>
-                    <div class="property-card__body">
-                        <h3 class="visually-hidden">${listing.name}</h3>
-                        <span class="property-card__price">
-                            <span class="visually-hidden">Price</span>
-                            $${listing.price}
-                        </span>
-                        <h4 class="visually-hidden">Characteristics</h4>
-                        <div class="property-card__characteristics">
-                            <ul class="property-card__list">
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bedrooms}</strong> Beds
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.bathrooms}</strong> Baths
-                                    </span>
-                                </li>
-                                <li class="property-card__item">
-                                    <span class="property-card__characteristic">
-                                        <strong>${listing.footage}</strong> Sqft
-                                    </span>
-                                </li>
-                            </ul>
-                            <span class="property-card__status">${propertyStatus}</span>
-                        </div>
-                        <span class="visually-hidden">Address</span>
-                        <address class="property-card__address">${listing.address} ${listing.district_name} ${listing.zip}</address>
+    <main>
+        <section class="section container">
+            <div class="section__header">
+                <div class="search-results__header">
+                    <h1 class="search-results__title">Rent a house in Wynwood, Miami</h1>
+                    <div class="search-results__sort-by sort-by">
+                        <label for="search-results-sort-by-select"
+                            class="search-results__sort-by-label sort-by__label">Sort by:</label>
+                        <select id="search-results-sort-by-select"
+                            class="search-results__sort-by-select sort-by__select">
+                            <option value="newest">Newest listings</option>
+                            <option value="price-lth">Price low to high</option>
+                            <option value="price-htl">Price high to low</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <button type="button" class="search-results__button button">Load more listings</button>
-        </div>
-    </section>
-</main>
-<?php require_once '../blocks/footer.php'; ?>
+            <div class="search-results__body">
+                <div class="search-results__grid">
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card__top">
+                            <img src="/realto/images/property-images/3_673f7a92c9f9e.jpg" alt=""
+                                class="property-card__image">
+                            <div class="property-card__type">
+                                <span>${propertyType}</span>
+                            </div>
+                        </div>
+                        <div class="property-card__body">
+                            <h3 class="visually-hidden">${listing.name}</h3>
+                            <span class="property-card__price">
+                                <span class="visually-hidden">Price</span>
+                                $${listing.price}
+                            </span>
+                            <h4 class="visually-hidden">Characteristics</h4>
+                            <div class="property-card__characteristics">
+                                <ul class="property-card__list">
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bedrooms}</strong> Beds
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.bathrooms}</strong> Baths
+                                        </span>
+                                    </li>
+                                    <li class="property-card__item">
+                                        <span class="property-card__characteristic">
+                                            <strong>${listing.footage}</strong> Sqft
+                                        </span>
+                                    </li>
+                                </ul>
+                                <span class="property-card__status">${propertyStatus}</span>
+                            </div>
+                            <span class="visually-hidden">Address</span>
+                            <address class="property-card__address">${listing.address} ${listing.district_name}
+                                ${listing.zip}</address>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="search-results__button button">Load more listings</button>
+            </div>
+        </section>
+    </main>
+    <?php require_once '../blocks/footer.php'; ?>

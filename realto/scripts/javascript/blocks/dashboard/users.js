@@ -1,6 +1,6 @@
 export async function displayUsers() {
     const usersContainer = document.querySelector('.dashboard__item-list');
-    usersContainer.innerHTML='';
+    usersContainer.innerHTML = '';
     const response = await fetch('/realto/scripts/php/blocks/dashboard/display-users.php', {
         headers: {
             'ajax-request': 'true'
@@ -13,7 +13,7 @@ export async function displayUsers() {
                 throw new Error("No users available");
             }
             const users = result.users;
-            
+
             users.forEach(user => {
 
                 const registrationDate = user.registration_date.split(' ')[0];
@@ -45,7 +45,7 @@ export async function displayUsers() {
                 <ul class="dashboard__manage-users-actions-container">
                     <span class="visually-hidden">Actions</span>
                     <li class="dashboard__manage-users-actions-item">
-                        <button class="dashboard__manage-users-action link">Contact user</button>
+                        <a href="mailto:${user.email}" class="dashboard__manage-users-action link">Contact user</button>
                     </li>
                     <!--<li class="dashboard__manage-users-actions-item">
                         <button class="dashboard__manage-users-action link">See properties</button>
@@ -81,8 +81,8 @@ async function handleAction(event) {
     const targetId = parent.dataset.dashboardElementId;
     const action = button.dataset.dashboardElementAction;
 
-    if(action === 'delete') {
-        if(!confirm(`Do you really want to delete this ${targetType}?`)) {
+    if (action === 'delete') {
+        if (!confirm(`Do you really want to delete this ${targetType}?`)) {
             return;
         }
     }
@@ -110,12 +110,12 @@ async function handleAction(event) {
         if (result.success) {
             alert('Action completed successfully');
             location.reload();
-        } 
+        }
         else {
             alert(result.message || 'Failed to complete action');
         }
 
-    } 
+    }
     else {
         alert('An error occurred. Try again later.');
         console.error('Server error:', response.status, response.statusText);

@@ -1,5 +1,5 @@
 <?php
-    require_once '../blocks/header.php';
+require_once '../blocks/header.php';
 ?>
 
 <main>
@@ -7,28 +7,29 @@
     <section class="hero section">
         <div class="container">
             <div class="section__body">
-                    <div class="hero__main">
-                        <div class="hero__content">
-                            <h1 class="hero__title">Miami’s best property. Welcome to Realto.</h1>
-                            <div class="hero__description">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-                            </div>
+                <div class="hero__main">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Miami’s best property. Welcome to Realto.</h1>
+                        <div class="hero__description">
+                            <p>Discover premium real estate in Miami's finest neighborhoods. Browse verified listings,
+                                connect with owners, and find your next home today.</p>
                         </div>
-                        <form class="hero__search-form search-form" action="/realto/pages/search-results.php" method="get">
-                            <select name="property-type" id="hero__property-type" class="field__input">
-                                <option value="homes">Homes</option>
-                                <option value="apartments">Apartments</option>
-                            </select>
-                            <select name="offer-type" id="hero__listing-type" class="field__input">
-                                <option value="for-sale">For Sale</option>
-                                <option value="for-rent">For Rent</option>
-                            </select>
-                            <select name="district" id="hero__district" class="field__input" data-districts>
-                                <option value="any">Any District</option>
-                            </select>
-                            <button class="hero__search-form-button search-form__button button">Search</button>
-                        </form>
                     </div>
+                    <form class="hero__search-form search-form" action="/realto/pages/search-results.php" method="get">
+                        <select name="property-type" id="hero__property-type" class="field__input">
+                            <option value="houses">Houses</option>
+                            <option value="apartments">Apartments</option>
+                        </select>
+                        <select name="offer-type" id="hero__listing-type" class="field__input">
+                            <option value="for-sale">For Sale</option>
+                            <option value="for-rent">For Rent</option>
+                        </select>
+                        <select name="district" id="hero__district" class="field__input" data-districts>
+                            <option value="all">All districts</option>
+                        </select>
+                        <button class="hero__search-form-button search-form__button button">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -44,17 +45,19 @@
             </div>
             <ul class="variant-pills">
                 <li class="variant-pills__variant">
-                    <button class="variant-pills__button" data-variant="family-houses" id="variant-pills-first-button">Family houses</button>
+                    <button class="variant-pills__button" data-variant="family-houses"
+                        id="variant-pills-first-button">Family houses</button>
                 </li>
                 <li class="variant-pills__variant">
                     <button class="variant-pills__button" data-variant="short-term-rentals">Short term rentals</button>
                 </li>
                 <li class="variant-pills__variant">
-                    <button class="variant-pills__button" data-variant="affordable-apartments">Affordable apartments</button>
+                    <button class="variant-pills__button" data-variant="affordable-apartments">Affordable
+                        apartments</button>
                 </li>
-                <li class="variant-pills__variant">
+                <!-- <li class="variant-pills__variant">
                     <button class="variant-pills__button" data-variant="new-to-realto">New to Realto</button>
-                </li>
+                </li> -->
                 <li class="variant-pills__variant">
                     <button class="variant-pills__button" data-variant="luxury-rentals">Luxury rentals</button>
                 </li>
@@ -66,8 +69,7 @@
                     <ul class="slider__list">
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -96,13 +98,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -131,13 +134,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -166,13 +170,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -201,13 +206,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -236,13 +242,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -271,13 +278,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -306,13 +314,14 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -341,7 +350,9 @@
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -686,11 +697,13 @@
             <div class="locations">
                 <div class="locations__item locations__item--1">
                     <img src="../images/website-images/1.jpg" alt="" class="locations__image">
-                    <a class="locations__title" href="/realto/pages/search-results.php?district=Coconut Grove">Coconut Grove</a>
+                    <a class="locations__title" href="/realto/pages/search-results.php?district=Coconut Grove">Coconut
+                        Grove</a>
                 </div>
                 <div class="locations__item locations__item--2">
                     <img src="../images/website-images/3.jpg" alt="" class="locations__image">
-                    <a class="locations__title" href="/realto/pages/search-results.php?district=Coral Gables">Coral Gables</a>
+                    <a class="locations__title" href="/realto/pages/search-results.php?district=Coral Gables">Coral
+                        Gables</a>
                 </div>
                 <div class="locations__item locations__item--3">
                     <img src="../images/website-images/2.jpg" alt="" class="locations__image">
@@ -706,7 +719,8 @@
                 </div>
                 <div class="locations__item locations__item--6">
                     <img src="../images/website-images/6.jpg" alt="" class="locations__image">
-                    <a class="locations__title" href="/realto/pages/search-results.php?district=Westchester">Westchester</a>
+                    <a class="locations__title"
+                        href="/realto/pages/search-results.php?district=Westchester">Westchester</a>
                 </div>
             </div>
         </div>
@@ -715,5 +729,5 @@
 
 
 <?php
-    require_once '../blocks/footer.php';
+require_once '../blocks/footer.php';
 ?>

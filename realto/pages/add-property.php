@@ -238,13 +238,13 @@ require_once '../blocks/header.php';
                             <h3 class="h4">Contact information</h3>
                             <ul class="listing-form__contact-info-list">
                                 <li class="listing-form__contact-info-item">
-                                    <span><b>Name: </b>Alex Tilbury</span>
+                                    <span><b>Name: </b><?php echo $_SESSION["first_name"] . ' ' . $_SESSION["last_name"] ?></span>
                                 </li>
-                                <li class="listing-form__contact-info-item">
+                                <!--<li class="listing-form__contact-info-item">
                                     <span><b>Phone: </b>+1-232-33-443</span>
-                                </li>
+                                </li>-->
                                 <li class="listing-form__contact-info-item">
-                                    <span><b>Email: </b>alextilbury1@gmail.com</span>
+                                    <span><b>Email: </b><?php echo $_SESSION["email"] ?></span>
                                 </li>
                             </ul>
                         </div>

@@ -1,11 +1,24 @@
 import { displayLoggedInUserData } from "/realto/scripts/javascript/functions/user-data.js";
 
-document.addEventListener('DOMContentLoaded', ()=> {
+document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('[data-profile-and-settings-form]');
     forms.forEach((form) => {
         form.addEventListener('submit', sendFormData);
-    })
-})
+    });
+
+    const fileInput = document.querySelector('input[name="new-profile-picture"]');
+    if (fileInput) {
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files?.[0];
+            if (file) {
+                const previewImg = document.querySelector('.dashboard__profile-and-settings-profile-picture');
+                if (previewImg) {
+                    previewImg.src = URL.createObjectURL(file);
+                }
+            }
+        });
+    }
+});
 
 async function sendFormData(event) {
     event.preventDefault();

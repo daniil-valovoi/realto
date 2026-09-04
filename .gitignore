@@ -1,0 +1,6 @@
+realto/images/property-images/*
+!realto/images/property-images/default-images/
+
+realto/images/user-images/*
+!realto/images/user-images/default.png
+!realto/images/user-images/example.webp

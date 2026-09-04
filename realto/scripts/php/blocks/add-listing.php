@@ -1,7 +1,8 @@
 <?php
-require_once  $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/database-connection.php';
-require_once  $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/api-functions.php';
-function displayFirstProperty($userId) {
+require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/database-connection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/api/api-functions.php';
+function displayFirstProperty($userId)
+{
     $query = "SELECT p.*, pi.image_name AS main_image, d.district_name, ps.status_name
     FROM
     properties AS p
@@ -12,17 +13,16 @@ function displayFirstProperty($userId) {
     $userProperties = fetchData($query, ['i', $userId]);
     $firstProperty = null;
 
-    if(!empty($userProperties)) {
+    if (!empty($userProperties)) {
         global $firstProperty;
         $firstProperty = $userProperties[0];
-    }
-    else {
+    } else {
         echo '<script>alert("You have no active properties. Create one, or activate existing properties.")</script>';
-        echo '<script>setTimeout(function() { window.location.href = "/realto/pages/add-property.php"; }, 2000);</script>';
+        echo '<script>setTimeout(function() { window.location.href = "/realto/pages/add-property.php"; }, 500);</script>';
         exit;
     }
 }
-//restrictAccess();
+restrictAccess();
 
 
 
@@ -36,21 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'message' => 'null'
     ];
     $validator = new Validator();
-    
 
-    try{
-        
+
+    try {
+
         $userId = $validator->validateNumeric('user ID', $userId);
-        
+
         $propertyId = $validator->validateSelection(
             'property-id',
             $_POST['property-id'],
             [fetchData('SELECT property_id FROM properties WHERE user_id = ?', ['i', $userId], 'property_id')]
         );
 
-        if(!$propertyId) {
+        if (!$propertyId) {
             throw new Exception('Invalid property selected');
-            
+
         }
 
         $offerTypeId = null;
@@ -61,78 +61,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ['rent', 'sale']
         );
 
-        if(!$listingType) {
+        if (!$listingType) {
             throw new Exception('Invalid listing type');
-            
+
         }
 
-        if($listingType === 'rent') {
+        if ($listingType === 'rent') {
             $offerTypeId = 1;
             $count = fetchData('SELECT COUNT(listing_id) FROM listings WHERE property_id = ? AND offer_type_id = ?', ['ii', $propertyId, $offerTypeId], 'COUNT(listing_id)');
-            if($count > 0) {
+            if ($count > 0) {
                 throw new Exception('Listing for this property already exists');
             }
 
             $rentPrice = $validator->validateNumeric('price', $_POST['rent-price'], 100, 999999);
-            if(!$rentPrice) {
+            if (!$rentPrice) {
                 throw new Exception('Invalid rent price');
-                
+
             }
 
             $securityDeposit = $validator->validateNumeric('security-deposit', $_POST['security-deposit'], 100, 999999);
-            if(!$securityDeposit) {
+            if (!$securityDeposit) {
                 throw new Exception('Invalid security deposit');
-                
+
             }
 
             $minimalRentTime = $validator->validateNumeric('minimal-rent-time', $_POST['minimal-rent-time'], 1, 1000);
-            if(!$minimalRentTime) {
+            if (!$minimalRentTime) {
                 throw new Exception('Invalid rent time');
             }
-            
+
             $petFriendly = $validator->validateSelection(
                 'pet-friendly',
                 $_POST['pet-friendly'],
                 ['yes', 'no']
             );
-            if(!$petFriendly) {
+            if (!$petFriendly) {
                 throw new Exception('Invalid pet-friendly field value');
             }
 
-            if($petFriendly === 'yes') {
+            if ($petFriendly === 'yes') {
                 $petFriendly = 1;
             }
-            if($petFriendly === 'no') {
+            if ($petFriendly === 'no') {
                 $petFriendly = 0;
             }
 
         }
 
-        if($listingType === 'sale') {
+        if ($listingType === 'sale') {
             $offerTypeId = 2;
 
-            if(fetchData('SELECT COUNT(listing_id) FROM listings WHERE property_id = ? AND offer_type_id = ?', ['ii', $propertyId, $offerTypeId], 'COUNT(listing_id)') > 0) {
+            if (fetchData('SELECT COUNT(listing_id) FROM listings WHERE property_id = ? AND offer_type_id = ?', ['ii', $propertyId, $offerTypeId], 'COUNT(listing_id)') > 0) {
                 throw new Exception('Listing for this property already exists');
             }
 
-            $salePrice = $validator->validateNumeric('price', $_POST['sale-price'], 1000, 99999999);  
-            if(!$salePrice) {
+            $salePrice = $validator->validateNumeric('price', $_POST['sale-price'], 1000, 99999999);
+            if (!$salePrice) {
                 throw new Exception('Invalid sale price');
-                
+
             }
         }
 
         $statusId = null;
 
         $status = $validator->validateSelection('status', $_POST['status'], ['active', 'inactive']);
-        if(!$status) {
+        if (!$status) {
             throw new Exception('Invalid status');
-            
+
         }
-        if($status === 'active') {
+        if ($status === 'active') {
             $statusId = 1;
         }
-        if($status === 'inactive') {
+        if ($status === 'inactive') {
             $statusId = 2;
         }
 
@@ -143,8 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             insertData($query, ['iiii', $propertyId, $statusId, $offerTypeId, $userId]);
-            
-            switch($listingType) {
+
+            switch ($listingType) {
                 case 'rent':
                     $query = 'INSERT INTO for_rent(listing_id, property_id, user_id, pet_friendly, price, security_deposit, minimal_rent_time, status_id) VALUES(LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?)';
                     $params = ['iiiiiii', $propertyId, $userId, $petFriendly, $rentPrice, $securityDeposit, $minimalRentTime, $statusId];
@@ -157,20 +157,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             insertData($query, $params);
             $response['success'] = true;
-            echo "<script>setTimeout(function() { window.location.href = '/realto/pages/property-page.php?id={$propertyId}'; }, 2000);</script>";
+            echo "<script>setTimeout(function() { window.location.href = '/realto/pages/property-page.php?id={$propertyId}'; }, 500);</script>";
             echo '<script>alert("Listing successfully uploaded");</script>';
             exit;
-        }
-        catch(Exception $exception) {
+        } catch (Exception $exception) {
             throw new Exception('Error inserting listing to the database');
         }
-        
-    }
-    catch(Exception $exception) {
+
+    } catch (Exception $exception) {
         $response['message'] = $exception->getMessage();
     }
 
-    if($response['message']) {
+    if ($response['message']) {
         echo "<script>alert('{$response['message']}');
         window.history.back();
         </script>";

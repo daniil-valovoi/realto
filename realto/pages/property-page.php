@@ -2,8 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/realto/scripts/php/blocks/property-page.php';
 try {
     $propertyData = (array) displayProperty();
-}
-catch (Exception $exception) {
+} catch (Exception $exception) {
     returnData($exception->getMessage());
 }
 $propertyId = $propertyData['property_id'];
@@ -22,7 +21,7 @@ $address = $propertyData['address'];
 $district = $propertyData['district_name'];
 $zip = $propertyData['zip'];
 $userName = $propertyData['first_name'] . ' ' . $propertyData['last_name'];
-$userEmail = $propertyData['email']; 
+$userEmail = $propertyData['email'];
 $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData['profile_picture'];
 $offerType = $propertyData['offer_type'];
 $forSale = false;
@@ -32,7 +31,7 @@ $petFriendly = ($propertyData['pet_friendly'] = 0) ? 'No' : 'Yes' ?? null;
 $securityDeposit = $propertyData['security_deposit'] ?? null;
 $minimalRentTime = $propertyData['minimal_rent_time'] ?? null;
 
-switch($offerType) {
+switch ($offerType) {
     case 'sale':
         $displayedPrice = '$' . $propertyData['sale_price'];
         $forSale = true;
@@ -48,24 +47,26 @@ switch($offerType) {
         $forRent = true;
         $forSale = true;
         break;
-    
+
     case 'none':
         break;
 }
 
 ?>
+
 <head>
     <style>
         body {
             background-color: var(--color-gray-light);
         }
+
         .footer {
             background-color: var(--color-white);
         }
     </style>
 </head>
 <main>
-    <h1 class="visually-hidden" data-data="property-title"><?echo $propertyTitle?></h1>
+    <h1 class="visually-hidden" data-data="property-title"><? echo $propertyTitle ?></h1>
     <section class="section container">
         <div class="property__column--tablet property__column">
             <div class="grid grid--6 property__grid">
@@ -79,14 +80,20 @@ switch($offerType) {
                                     <div class="gallery__buttons-container">
                                         <button class="chevron-button" id="left">
                                             <span class="visually-hidden">Previous image</span>
-                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none"
+                                                    stroke-width="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </button>
                                         <button class="chevron-button chevron-button--right" id="right">
                                             <span class="visually-hidden">Next image</span>
-                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none"
+                                                    stroke-width="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </button>
                                     </div>
@@ -102,13 +109,12 @@ switch($offerType) {
                                 <dl class="property__details-container property__details-container--vertical">
                                     <div class="property__detail-container property__detail-container--price-address">
                                         <?php
-                                        if($forSale || $forRent) {
+                                        if ($forSale || $forRent) {
                                             echo <<<HTML
                                                 <dt class="visually-hidden">Price</dt>
                                                 <dd class="property__text--h2 h2"><span data-data="price">$displayedPrice</span></dd>
                                             HTML;
-                                        }
-                                        else if(!$forSale && !$forRent) {
+                                        } else if (!$forSale && !$forRent) {
                                             echo <<<HTML
                                                 <span class="property__text--h4 h4">No listings connected to this property</span>
                                             HTML;
@@ -117,20 +123,27 @@ switch($offerType) {
                                     </div>
                                     <div class="property__detail-container">
                                         <dt class="visually-hidden">Address</dt>
-                                        <dd class="property__text--p"><span data-data="address"><?php echo $address . ', ' . $zip?></span></dd>
+                                        <dd class="property__text--p"><span
+                                                data-data="address"><?php echo $address . ', ' . $zip ?></span></dd>
                                     </div>
                                 </dl>
                                 <dl class="property__details-row property__details-quick-details">
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="bedrooms"><?php echo $bedrooms?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="bedrooms"><?php echo $bedrooms ?></span></dd>
                                         <dt class="property__text--p">Bedrooms</dt>
                                     </div>
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="bathrooms"><?php echo $bathrooms?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="bathrooms"><?php echo $bathrooms ?></span></dd>
                                         <dt class="property__text--p">Bathrooms</dt>
                                     </div>
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="footage"><?php echo $footage?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="footage"><?php echo $footage ?></span></dd>
                                         <dt class="property__text--p">Sqft</dt>
                                     </div>
                                 </dl>
@@ -154,13 +167,19 @@ switch($offerType) {
                             <h2 class="info-card__subheading h4">Description</h2>
                         </header>
                         <div class="info-card__main">
-                            <h3 class="property__title h1" data-data="property-title"><?php echo $propertyTitle?></h3>
-                            <p class="property__description property__description--closed" data-data="property-description"><?php echo $propertyDescription?></p>
-                            <button class="property__description-toggle-button link--bold link">Read full description 
-                                <svg class="property__description-toggle-button-icon link__arrow-icon arrow-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.3335 5.82292H10.6668M10.6668 5.82292L6.00016 1.15625M10.6668 5.82292L6.00016 10.4896" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <h3 class="property__title h1" data-data="property-title"><?php echo $propertyTitle ?></h3>
+                            <p class="property__description property__description--closed"
+                                data-data="property-description"><?php echo $propertyDescription ?></p>
+                            <!-- <button class="property__description-toggle-button link--bold link">Read full description
+                                <svg class="property__description-toggle-button-icon link__arrow-icon arrow-icon"
+                                    width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.3335 5.82292H10.6668M10.6668 5.82292L6.00016 1.15625M10.6668 5.82292L6.00016 10.4896"
+                                        stroke="none" stroke-width="none" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div class="info-card">
@@ -174,24 +193,27 @@ switch($offerType) {
                                         <dt class="property__details-list-detail-title">Status</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail"><?php echo $propertyStatus?></dd>
+                                    <dd class="property__details-list-detail"><?php echo $propertyStatus ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Property type</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="property-type"><?php echo $propertyType?></dd>
+                                    <dd class="property__details-list-detail" data-data="property-type">
+                                        <?php echo $propertyType ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Footage</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail"><span data-data="footage"><?php echo $footage?></span> sqft</dd>
+                                    <dd class="property__details-list-detail"><span
+                                            data-data="footage"><?php echo $footage ?></span> sqft</dd>
                                 </div>
                                 <?php
-                                if($lotSize) {
+                                if ($lotSize) {
                                     echo <<<HTML
                                     <div class="property__details-list-item">
                                         <div class="property__details-list-detail-title-wrapper">
@@ -201,8 +223,7 @@ switch($offerType) {
                                         <dd class="property__details-list-detail"><span data-data="lot-size">$lotSize</span> sqft</dd>
                                     </div>
                                     HTML;
-                                }
-                                else {
+                                } else {
                                     echo <<<HTML
                                     <div class="property__details-list-item">
                                         <div class="property__details-list-detail-title-wrapper">
@@ -219,41 +240,50 @@ switch($offerType) {
                                         <dt class="property__details-list-detail-title">Bedrooms</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="bedrooms"><?php echo $bedrooms?></dd>
+                                    <dd class="property__details-list-detail" data-data="bedrooms">
+                                        <?php echo $bedrooms ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Bathrooms</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="bathrooms"><?php echo $bathrooms?></dd>
+                                    <dd class="property__details-list-detail" data-data="bathrooms">
+                                        <?php echo $bathrooms ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Floors</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="floors"><?php echo $floors?></dd>
+                                    <dd class="property__details-list-detail" data-data="floors"><?php echo $floors ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Parking spots</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="parking-spots"><?php echo $parkingSpots?></dd>
+                                    <dd class="property__details-list-detail" data-data="parking-spots">
+                                        <?php echo $parkingSpots ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Property ID</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="property-id"><?php echo $propertyId?></dd>
+                                    <dd class="property__details-list-detail" data-data="property-id">
+                                        <?php echo $propertyId ?>
+                                    </dd>
                                 </div>
                             </dl>
                         </div>
                     </div>
                     <?php
-                    if($forRent) {
+                    if ($forRent) {
                         echo <<<HTML
                             <div class="info-card">
                                 <header class="info-card__info">
@@ -286,7 +316,7 @@ switch($offerType) {
                                 </div>
                             </div>
                         HTML;
-                    }?>
+                    } ?>
                     <div class="info-card">
                         <header class="info-card__info">
                             <h2 class="info-card__subheading h4">Location</h2>
@@ -298,21 +328,24 @@ switch($offerType) {
                                         <dt class="property__details-list-detail-title">Street</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="address"><?php echo $address?></dd>
+                                    <dd class="property__details-list-detail" data-data="address"><?php echo $address ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">District</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="district"><?php echo $district?></dd>
+                                    <dd class="property__details-list-detail" data-data="district">
+                                        <?php echo $district ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">ZIP</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="zip"><?php echo $zip?></dd>
+                                    <dd class="property__details-list-detail" data-data="zip"><?php echo $zip ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
@@ -332,16 +365,21 @@ switch($offerType) {
                         </header>
                         <div class="info-card__main">
                             <div class="user-info">
-                                <img class="user-info__profile-picture" alt="User profile picture" src="<?php echo $profilePicture?>" data-data="profile-picture">
+                                <img class="user-info__profile-picture" alt="User profile picture"
+                                    src="<?php echo $profilePicture ?>" data-data="profile-picture">
                                 <div class="user-info__info">
-                                    <span class="user-info__name h4" data-data="user-name"><?php echo $userName?></span>
+                                    <span class="user-info__name h4"
+                                        data-data="user-name"><?php echo $userName ?></span>
                                     <span class="user-info__subtext bold">Owner</span>
                                 </div>
                             </div>
                             <div class="user-info__buttons-container">
-                                <button class="link restricted-content--not-auth sign-in-button" onclick="signInPopup.showModal()">Log in/sign up to contact the user</button>
-                                <button class="button button--ghost restricted-content--auth"><a href="mailto:<?php echo $userEmail?>">Email the user</a></button>
-                                <button class="button open-chat-button restricted-content--auth" onclick="chats.showModal()" data-target="chats">Send a message</button>
+                                <button class="link restricted-content--not-auth sign-in-button"
+                                    onclick="signInPopup.showModal()">Log in/sign up to contact the user</button>
+                                <button class="button button--ghost restricted-content--auth"><a
+                                        href="mailto:<?php echo $userEmail ?>">Email the user</a></button>
+                                <button class="button open-chat-button restricted-content--auth"
+                                    onclick="chats.showModal()" data-target="chats">Send a message</button>
                             </div>
                         </div>
                     </div>
@@ -663,4 +701,4 @@ switch($offerType) {
     </section>-->
 </main>
 
-<?php require_once '../blocks/footer.php';?>
+<?php require_once '../blocks/footer.php'; ?>

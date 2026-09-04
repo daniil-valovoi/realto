@@ -18,18 +18,20 @@ $zip = $propertyData['zip'];
 $userName = $propertyData['first_name'] . ' ' . $propertyData['last_name'];
 $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData['profile_picture'];
 ?>
+
 <head>
     <style>
         body {
             background-color: var(--color-gray-light);
         }
+
         .footer {
             background-color: var(--color-white);
         }
     </style>
 </head>
 <main>
-    <h1 class="visually-hidden" data-data="property-title"><?echo $propertyTitle?></h1>
+    <h1 class="visually-hidden" data-data="property-title"><? echo $propertyTitle ?></h1>
     <section class="section container">
         <div class="property__column--tablet property__column">
             <div class="grid grid--6 property__grid">
@@ -43,14 +45,20 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                     <div class="gallery__buttons-container">
                                         <button class="chevron-button" id="left">
                                             <span class="visually-hidden">Previous image</span>
-                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none"
+                                                    stroke-width="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </button>
                                         <button class="chevron-button chevron-button--right" id="right">
                                             <span class="visually-hidden">Next image</span>
-                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg class="chevron-icon" width="11" height="7" viewBox="0 0 11 7"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.5 1.91138L5.5 5.91138L9.5 1.91138" stroke="none"
+                                                    stroke-width="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </button>
                                     </div>
@@ -60,7 +68,8 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <img class="gallery__image" src="/realto/images/property-images/5.png" alt="">
                                     </li>
                                     <li class="gallery__item">
-                                        <img class="gallery__image" src="/realto/images/property-images/example.jpg" alt="">
+                                        <img class="gallery__image" src="/realto/images/property-images/example.jpg"
+                                            alt="">
                                     </li>
                                     <li class="gallery__item">
                                         <img class="gallery__image" src="/realto/images/property-images/2.jpg" alt="">
@@ -97,20 +106,27 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                     </div>
                                     <div class="property__detail-container">
                                         <dt class="visually-hidden">Address</dt>
-                                        <dd class="property__text--p"><span data-data="address"><?php echo $address . ', ' . $zip?></span></dd>
+                                        <dd class="property__text--p"><span
+                                                data-data="address"><?php echo $address . ', ' . $zip ?></span></dd>
                                     </div>
                                 </dl>
                                 <dl class="property__details-row property__details-quick-details">
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="bedrooms"><?php echo $bedrooms?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="bedrooms"><?php echo $bedrooms ?></span></dd>
                                         <dt class="property__text--p">Bedrooms</dt>
                                     </div>
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="bathrooms"><?php echo $bathrooms?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="bathrooms"><?php echo $bathrooms ?></span></dd>
                                         <dt class="property__text--p">Bathrooms</dt>
                                     </div>
-                                    <div class="property__detail-container property__detail-container--align-items-center">
-                                        <dd class="property__text--h3 h3"><span data-data="footage"><?php echo $footage?></span></dd>
+                                    <div
+                                        class="property__detail-container property__detail-container--align-items-center">
+                                        <dd class="property__text--h3 h3"><span
+                                                data-data="footage"><?php echo $footage ?></span></dd>
                                         <dt class="property__text--p">Sqft</dt>
                                     </div>
                                 </dl>
@@ -120,10 +136,15 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                     <div class="info-card">
                         <div class="info-card__main">
                             <div class="property__details-row property__details-row--space-between">
-                                <p class="property__text--text">This property is also available for <span data-data="also-available-for">rent</span>.</p>
+                                <p class="property__text--text">This property is also available for <span
+                                        data-data="also-available-for">rent</span>.</p>
                                 <a href="" class="link--bold link nowrap">See details
-                                    <svg class="link__arrow-icon arrow-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.3335 5.82292H10.6668M10.6668 5.82292L6.00016 1.15625M10.6668 5.82292L6.00016 10.4896" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="link__arrow-icon arrow-icon" width="12" height="12" viewBox="0 0 12 12"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.3335 5.82292H10.6668M10.6668 5.82292L6.00016 1.15625M10.6668 5.82292L6.00016 10.4896"
+                                            stroke="none" stroke-width="none" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </a>
                             </div>
@@ -134,13 +155,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                             <h2 class="info-card__subheading h4">Description</h2>
                         </header>
                         <div class="info-card__main">
-                            <h3 class="property__title h1" data-data="property-title"><?php echo $propertyTitle?></h3>
-                            <p class="property__description property__description--closed" data-data="property-description"><?php echo $propertyDescription?></p>
-                            <button class="property__description-toggle-button link--bold link">Read full description 
+                            <h3 class="property__title h1" data-data="property-title"><?php echo $propertyTitle ?></h3>
+                            <p class="property__description property__description--closed"
+                                data-data="property-description"><?php echo $propertyDescription ?></p>
+                            <!-- <button class="property__description-toggle-button link--bold link">Read full description 
                                 <svg class="property__description-toggle-button-icon link__arrow-icon arrow-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1.3335 5.82292H10.6668M10.6668 5.82292L6.00016 1.15625M10.6668 5.82292L6.00016 10.4896" stroke="none" stroke-width="none" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div class="info-card">
@@ -154,17 +176,19 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <dt class="property__details-list-detail-title">Property type</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="property-type"><?php echo $propertyType?></dd>
+                                    <dd class="property__details-list-detail" data-data="property-type">
+                                        <?php echo $propertyType ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Footage</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail"><span data-data="footage"><?php echo $footage?></span> sqft</dd>
+                                    <dd class="property__details-list-detail"><span
+                                            data-data="footage"><?php echo $footage ?></span> sqft</dd>
                                 </div>
                                 <?php
-                                if($lotSize) {
+                                if ($lotSize) {
                                     echo `
                                     <div class="property__details-list-item">
                                         <div class="property__details-list-detail-title-wrapper">
@@ -174,8 +198,7 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <dd class="property__details-list-detail"><span data-data="lot-size">$lotSize</span> sqft</dd>
                                     </div>
                                     `;
-                                }
-                                else {
+                                } else {
                                     echo `
                                     <div class="property__details-list-item">
                                         <div class="property__details-list-detail-title-wrapper">
@@ -192,35 +215,40 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <dt class="property__details-list-detail-title">Bedrooms</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="bedrooms"><?php echo $bedrooms?></dd>
+                                    <dd class="property__details-list-detail" data-data="bedrooms">
+                                        <?php echo $bedrooms ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Bathrooms</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="bathrooms"><?php echo $bathrooms?></dd>
+                                    <dd class="property__details-list-detail" data-data="bathrooms">
+                                        <?php echo $bathrooms ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Floors</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="floors"><?php echo $floors?></dd>
+                                    <dd class="property__details-list-detail" data-data="floors"><?php echo $floors ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Parking spots</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="parking-spots"><?php echo $parkingSpots?></dd>
+                                    <dd class="property__details-list-detail" data-data="parking-spots">
+                                        <?php echo $parkingSpots ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">Property ID</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="property-id"><?php echo $propertyId?></dd>
+                                    <dd class="property__details-list-detail" data-data="property-id">
+                                        <?php echo $propertyId ?></dd>
                                 </div>
                             </dl>
                         </div>
@@ -236,21 +264,23 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <dt class="property__details-list-detail-title">Street</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="address"><?php echo $address?></dd>
+                                    <dd class="property__details-list-detail" data-data="address"><?php echo $address ?>
+                                    </dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">District</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="district"><?php echo $district?></dd>
+                                    <dd class="property__details-list-detail" data-data="district">
+                                        <?php echo $district ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
                                         <dt class="property__details-list-detail-title">ZIP</dt>
                                         <div class="property__detail-separator"></div>
                                     </div>
-                                    <dd class="property__details-list-detail" data-data="zip"><?php echo $zip?></dd>
+                                    <dd class="property__details-list-detail" data-data="zip"><?php echo $zip ?></dd>
                                 </div>
                                 <div class="property__details-list-item">
                                     <div class="property__details-list-detail-title-wrapper">
@@ -270,9 +300,10 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                         </header>
                         <div class="info-card__main">
                             <div class="user-info">
-                                <img class="user-info__profile-picture" alt="User profile picture" src="<?php echo $profilePicture?>" data-data="profile-picture">
+                                <img class="user-info__profile-picture" alt="User profile picture"
+                                    src="<?php echo $profilePicture ?>" data-data="profile-picture">
                                 <div class="user-info__info">
-                                    <span class="user-info__name h4" data-data="user-name"><?php echo $userName?></span>
+                                    <span class="user-info__name h4" data-data="user-name"><?php echo $userName ?></span>
                                     <span class="user-info__subtext bold">Owner</span>
                                 </div>
                             </div>
@@ -303,8 +334,7 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                     <ul class="slider__list">
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -333,13 +363,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -368,13 +399,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -403,13 +435,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -438,13 +471,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -473,13 +507,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -508,13 +543,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -543,13 +579,14 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                         <li class="slider__slide">
                             <div class="slider__card property-card">
-                                <img src="../images/property-images/example.jpg"
-                                alt="" class="property-card__image">
+                                <img src="../images/property-images/example.jpg" alt="" class="property-card__image">
                                 <div class="property-card__body">
                                     <h3 class="visually-hidden">Property title</h3>
                                     <span class="property-card__price">
@@ -578,7 +615,9 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
                                         <span class="property-card__status">For sale & rent</span>
                                     </div>
                                     <span class="visually-hidden">Address</span>
-                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728</address>                                </div>
+                                    <address class="property-card__address">Kimberly St. 1234 Golden Beach 00-728
+                                    </address>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -599,4 +638,4 @@ $profilePicture = '/realto/images/user-images/profile-pictures/' . $propertyData
     </section>
 </main>
 
-<?php require_once '../blocks/footer.php';?>
+<?php require_once '../blocks/footer.php'; ?>
